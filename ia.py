@@ -1,6 +1,6 @@
 from bisect import bisect_left
 from itertools import izip
-from math import hypot, sqrt
+from math import hypot, log
 from random import shuffle, randrange, random
 
 
@@ -70,7 +70,7 @@ class GeneticSolver(object):
         n = len(ind1)
         child1, child2 = [], []
         for i in xrange(n):
-            if random() > 0.7:
+            if random() > 0.8:
                 child1.append(ind2[i])
                 child2.append(ind1[i])
             else:
@@ -121,7 +121,7 @@ class GeneticSolver(object):
         fitness = self.get_fitness(population)
         for _ in xrange(iterations):
             next_population = self.get_best(population, fitness,
-                                            int(sqrt(population_size)))
+                                            int(log(population_size)) + 1)
             distribution = self.get_distribution(fitness)
             random_args = (population, distribution)
 
